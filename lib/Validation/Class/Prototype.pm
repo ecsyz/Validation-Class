@@ -2725,7 +2725,8 @@ sub has_valid { goto &validate } sub validates { goto &validate } sub validate {
                     my @aliases = isa_arrayref($_->get('alias')) ?
                         @{$_->get('alias')} : ($_->get('alias'))
                     ;
-                    grep { $f eq $_ } @aliases;
+                    # if alias was specified, use field name instead
+                    push @fields, $_->get('name') if grep { $f eq $_ } @aliases;
                 }
             }
             $self->fields->values
