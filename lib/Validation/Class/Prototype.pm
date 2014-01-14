@@ -2849,12 +2849,15 @@ sub has_valid { goto &validate } sub validates { goto &validate } sub validate {
     # exclude fields with "required" problem and continue
     if ($self->error_count > 0) {
         my @exclude_fields = keys %{$self->error_fields};
-
-        $self->stash->{'validation.fields'} = [
-            grep { !($_ ~~ @exclude_fields) } @{$self->stash->{'validation.fields'}}
-        ];
-        # resume validation for require-passed fields
-        $self->stash->{'validation.bypass_event'}=0;
+        my $count_filds    = scalar @{$self->stash->{'validation.fields'}};
+        
+        if ($count_filds > scalar @exclude_fields) {
+            $self->stash->{'validation.fields'} = [
+                grep { !($_ ~~ @exclude_fields) } @{$self->stash->{'validation.fields'}}
+            ];
+            # resume validation for require-passed fields
+            $self->stash->{'validation.bypass_event'}=0;
+        }
     }
 
     # execute on_validate events
