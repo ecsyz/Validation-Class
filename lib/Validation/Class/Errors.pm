@@ -25,7 +25,7 @@ sub add {
 
     @{$self} = ($self->unique);
 
-    return $self;
+    return 0;
 
 }
 
