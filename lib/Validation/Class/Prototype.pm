@@ -1147,16 +1147,30 @@ sub get_values {
     return () unless @fields;
     return (
         map {
-            my $field = $self->fields->get($_);
-            my $param = $self->params->get($_);
-                $field->readonly ?
-                    $field->default || undef :
-                    $field->value   || $param
-                ;
-        }   @fields
+            $self->get_value($_)
+        } @fields
     );
 
 }
+
+sub get_value {
+
+    my ($self, $field) = @_;
+
+    return undef unless $field;
+    
+    $field = $self->fields->get($field);
+    my $param = $self->params->get($field);
+    
+    return 
+        $field->readonly ?
+            $field->default || undef :
+            $field->value   || $param
+    ;
+
+}
+
+
 
 =method is_valid
 
