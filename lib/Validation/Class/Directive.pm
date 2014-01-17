@@ -171,9 +171,9 @@ sub validate {
     my ($proto, $field, $param) = @_;
 
     my $context = $proto->stash->{'validation.context'};
-
+    my $params  = $proto->params;
     # nasty hack, we need a better way !!!
-    $self->validator->($context, $field, $proto->params);
+    $self->validator->($context, $field, $params, $params->{$field->{name}});
 
     return $self;
 
