@@ -29,6 +29,16 @@ sub add {
 
 }
 
+sub add_format {
+    my $self = shift;
+    
+    return 
+        add(
+            $self,
+            sprintf(shift, @_)
+        );
+}
+
 sub to_string {
 
     my ($self, $delimiter, $transformer) = @_;
