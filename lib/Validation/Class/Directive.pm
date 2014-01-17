@@ -132,7 +132,7 @@ sub new {
 
 sub error {
 
-    my ($self, $proto, $field, $param, @tokens) = @_;
+    my ($self, $proto, $field, $param, $field_name, @tokens) = @_;
 
     my $name = $field->label || $field->name;
 
