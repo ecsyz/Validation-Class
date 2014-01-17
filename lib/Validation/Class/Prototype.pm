@@ -1591,6 +1591,7 @@ sub proxy_methods {
         get_hash
         get_params
         get_values
+        get_value
         fields
         filtering
         ignore_failure
