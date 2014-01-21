@@ -129,10 +129,10 @@ sub new {
     return $self;
 
 }
-
+use Data::Dumper;
 sub error {
 
-    my ($self, $proto, $field, $param, $field_name, @tokens) = @_;
+    my ($self, $proto, $field, $param, @tokens) = @_;
 
     my $name = $field->label || $field->name;
 
@@ -173,7 +173,7 @@ sub validate {
     my $context = $proto->stash->{'validation.context'};
     my $params  = $proto->params;
     # nasty hack, we need a better way !!!
-    $self->validator->($context, $field, $params, $params->{$field->{name}});
+    $self->validator->($context, $field, $params);
 
     return $self;
 
